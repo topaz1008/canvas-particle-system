@@ -1,3 +1,6 @@
+import { Vec2 } from './math/vec2.js';
+import { Utils } from './common/utils.js';
+
 const TWO_PI = 2 * Math.PI;
 const TO_RADIANS = Math.PI / 180;
 const TO_DEGREES = 180 / Math.PI;
@@ -9,97 +12,44 @@ const originalImage = new Image();
 originalImage.src = PARTICLE_IMAGE_DATA;
 
 export class Particle {
+    position = new Vec2(0, 0);
+    velocity = new Vec2(0, 0);
+    acceleration = new Vec2(0, 0);
+
     /**
-     * @param x {Number}
-     * @param y {Number}
+     * @param position {Vec2}
      * @param size {Number}
      * @param rgbaColor {Object}
      * @constructor
      */
-    constructor(x, y, size, rgbaColor) {
-        this.x = x; // Position
-        this.y = y;
-        this.vx = 0; // Velocity
-        this.vy = 0;
-        this.ax = 0; // Acceleration
-        this.ay = 0;
+    constructor(position, size, rgbaColor) {
+        this.position = position; // Position
         this.size = size; // Image scaling
-        this.rotation = 0; // In radians
-        this.rgbaColor = rgbaColor;
+        this.color = rgbaColor;
         this.dead = false;
+        this.rotation = 0;
         this.timeToLive = 0;
         this.timeAlive = 0;
 
         // Color transform the original image and use that
-        const tintColor = this.#makeRGBA(this.rgbaColor.r, this.rgbaColor.g, this.rgbaColor.b, this.rgbaColor.a);
+        const tintColor = Utils.makeRGBA(this.color.r, this.color.g, this.color.b, this.color.a);
         this.img = new Image();
 
         // TODO: this can be optimized in the case we only use one color per emitter
         //       So we can do this at the emitter level, and do it only once, instead of per particle.
-        this.img.src = this.#tintImage(originalImage, tintColor);
+        this.img.src = Utils.tintImage(originalImage, tintColor);
     }
 
     /**
      * @param context {CanvasRenderingContext2D}
      */
     draw(context) {
-        // this.color = makeRGBA(this.rgbaColor.r, this.rgbaColor.g, this.rgbaColor.b, this.rgbaColor.a);
-        //
-        // context.fillStyle = this.color;
-        // context.beginPath();
-        // context.arc(this.x, this.y, this.radius, 0, TWO_PI);
-        // context.closePath();
-        // context.fill();
-
         context.save();
         context.globalAlpha = (1 - this.timeAlive / this.timeToLive);
 
-        context.translate(this.x, this.y);
-        // context.rotate(this.rotation);
+        context.translate(this.position.x, this.position.y);
         // this.img.src = tintImage(this.img, makeRGBA(this.rgbaColor.r, this.rgbaColor.g, this.rgbaColor.b, alpha));
         context.drawImage(this.img, 0, 0, this.img.width * this.size, this.img.height * this.size);
         context.restore();
-        // context.fill();
-    }
-
-    #makeRGBA(r, g, b, a) {
-        return ('rgba(R, G, B, A)')
-            .replace('R', (r | r).toString())
-            .replace('G', (g | g).toString())
-            .replace('B', (b | b).toString())
-            .replace('A', a.toString());
-    }
-
-    #tintImage(imageElement, tintColor) {
-        const canvas = document.createElement('canvas'),
-            context = canvas.getContext('2d');
-
-        canvas.width = imageElement.naturalWidth;
-        canvas.height = imageElement.naturalHeight;
-        context.drawImage(imageElement, 0, 0);
-
-        const buffer = context.getImageData(0, 0, imageElement.width, imageElement.height);
-
-        // Convert image to grayscale
-        for (let i = 0; i < buffer.data.length; i += 4) {
-            const r = buffer.data[i];
-            const g = buffer.data[i + 1];
-            const b = buffer.data[i + 2];
-            // Alpha is ignored
-
-            // Set all 3 channels to the average
-            const avg = Math.floor((r + g + b) / 3);
-            buffer.data[i] = buffer.data[i + 1] = buffer.data[i + 2] = avg;
-        }
-
-        context.putImageData(buffer, 0, 0);
-
-        // Overlay filled rectangle using source-in composition
-        context.globalCompositeOperation = 'source-in';
-        // context.globalAlpha = 1;
-        context.fillStyle = tintColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
-        return canvas.toDataURL();
     }
 }

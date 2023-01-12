@@ -1,5 +1,6 @@
 import { ParticleEmitter } from './particle-emitter.js';
 import { ParticleSystem } from './particle-system.js';
+import { Vec2 } from './math/vec2.js';
 
 // Globals
 const canvas = document.getElementById('main'),
@@ -22,10 +23,11 @@ window.addEventListener('resize', (e) => {
 
 canvas.addEventListener('mousedown', (e) => {
 
-    addEmitter(1, e.offsetX, e.offsetY);
+    addEmitter(1, new Vec2(e.offsetX, e.offsetY));
 
 }, false);
 
+addEmitter(1, new Vec2(canvas.width / 2, canvas.height / 2));
 update();
 
 // Update loop
@@ -53,13 +55,13 @@ function setViewportSize() {
 function setRenderStates() {
     // Blending mode
     context.globalCompositeOperation = 'screen';
-    context.imageSmoothingEnabled = false;
+    // context.imageSmoothingEnabled = false;
 }
 
-function addEmitter(num, x, y) {
-    const COUNT = 150;
+function addEmitter(num, position) {
+    const COUNT = 100;
     for (let i = 0; i < num; i++) {
-        const emitter = new ParticleEmitter(x, y, COUNT, context);
+        const emitter = new ParticleEmitter(position, COUNT, context);
         system.addEmitter(emitter);
     }
 }

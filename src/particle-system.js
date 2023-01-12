@@ -12,9 +12,7 @@ export class ParticleSystem {
     update(deltaTime) {
         for (let i = 0; i < this.emitters.length; i++) {
             const emitter = this.emitters[i];
-            if (!emitter) {
-                continue;
-            }
+            if (!emitter) continue;
 
             emitter.update(deltaTime);
 
