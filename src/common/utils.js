@@ -20,6 +20,10 @@ export class Utils {
 
         canvas.width = imageElement.naturalWidth;
         canvas.height = imageElement.naturalHeight;
+        if (canvas.width === 0 || canvas.height === 0) {
+            return '';
+        }
+
         context.drawImage(imageElement, 0, 0);
 
         const buffer = context.getImageData(0, 0, imageElement.width, imageElement.height);
