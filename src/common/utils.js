@@ -21,7 +21,7 @@ export class Utils {
         canvas.width = imageElement.naturalWidth;
         canvas.height = imageElement.naturalHeight;
         if (canvas.width === 0 || canvas.height === 0) {
-            return '';
+            return 'data:image/png;base64,';
         }
 
         context.drawImage(imageElement, 0, 0);
