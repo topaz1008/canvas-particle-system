@@ -21,13 +21,16 @@ window.addEventListener('resize', (e) => {
 
 }, false);
 
+window.onload = (e) => {
+    addEmitter(1, new Vec2(canvas.width / 2, canvas.height / 2));
+};
+
 canvas.addEventListener('mousedown', (e) => {
 
     addEmitter(1, new Vec2(e.offsetX, e.offsetY));
 
 }, false);
 
-addEmitter(1, new Vec2(canvas.width / 2, canvas.height / 2));
 update();
 
 // Update loop

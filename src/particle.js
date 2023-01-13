@@ -11,6 +11,7 @@ export class Particle {
     position = new Vec2(0, 0);
     velocity = new Vec2(0, 0);
     acceleration = new Vec2(0, 0);
+    imageLoaded = false;
 
     /**
      * @param position {Vec2}
@@ -31,6 +32,9 @@ export class Particle {
         const tintColor = Utils.makeRGBA(this.color.r, this.color.g, this.color.b, this.color.a);
         this.img = new Image();
 
+        this.img.onload = () => {
+            this.imageLoaded = true;
+        };
         // TODO: this can be optimized in the case we only use one color per emitter
         //       So we can do this at the emitter level, and do it only once, instead of per particle.
         this.img.src = Utils.tintImage(originalImage, tintColor);
@@ -40,6 +44,8 @@ export class Particle {
      * @param context {CanvasRenderingContext2D}
      */
     draw(context) {
+        if (!this.imageLoaded) return;
+
         context.save();
         context.globalAlpha = (1 - this.timeAlive / this.timeToLive);
 
