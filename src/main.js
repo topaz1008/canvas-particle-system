@@ -1,14 +1,31 @@
 import { ParticleEmitter } from './particle-emitter.js';
 import { ParticleSystem } from './particle-system.js';
+import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
 
+const VIEW_WIDTH = 1280,
+    VIEW_HEIGHT = 720;
+
 // Globals
-const canvas = document.getElementById('main'),
+const canvas = document.getElementById('main-canvas'),
     context = canvas.getContext('2d');
 
 let lastTime = Date.now(),
     viewWidth,
     viewHeight;
+
+const btnClear = new UIControlElement('#btn-clear[role=button]');
+btnClear.on('click', (e) => {
+    e.preventDefault();
+    console.log('clear');
+});
+
+const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]');
+dropdownEmitterType.on('change', (e) => {
+    e.preventDefault();
+    const target = e.target;
+    console.log('emitter type', target.value);
+});
 
 const system = new ParticleSystem();
 
@@ -51,14 +68,14 @@ function update(time) {
 
 // Set canvas and view size
 function setViewportSize() {
-    canvas.width = viewWidth = window.innerWidth - 20;
-    canvas.height = viewHeight = window.innerHeight - 20;
+    canvas.width = viewWidth = VIEW_WIDTH;
+    canvas.height = viewHeight = VIEW_HEIGHT;
 }
 
 function setRenderStates() {
     // Blending mode
     context.globalCompositeOperation = 'screen';
-    // context.imageSmoothingEnabled = false;
+    context.imageSmoothingEnabled = false;
 }
 
 function addEmitter(num, position) {

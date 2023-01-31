@@ -1,17 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <style>
-        body { margin: 0; background: #000000; }
-    </style>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+
+    <title>Emitter Based Particle System</title>
 </head>
 <body>
 
-<canvas id="main"></canvas>
+<header>
+    <h2>Emitter Based Particle System</h2>
+    <details open>
+        <summary>About</summary>
+        <p>You can click the mouse anywhere on the canvas to add a new emitter.</p>
+    </details>
+    <details>
+        <summary>Source Code and Credits</summary>
+        <p>Source code can be found on my <a href="https://github.com/topaz1008/canvas-particle-system/" target="_blank">GitHub</a>.</p>
+        <p>Credits: This demo is Using <a href="https://github.com/josephg/noisejs" target="_blank">noisejs</a> by josephg for generating the perlin noise.</p>
+    </details>
+</header>
+
+<main id="main-container" class="">
+
+    <fieldset>
+        <legend>Controls</legend>
+        <label>
+            <button id="btn-clear" role="button" data-action="click">Clear All Active Emitters</button>
+        </label>
+
+        <legend>Emitter Type</legend>
+        <label>
+            <select id="emitter-type" role="combobox" data-action="change">
+                <option value="attracting" selected>Attracting Emitter</option>
+                <option value="perlin">Perlin Emitter</option>
+                <option value="fireworks">Fireworks Emitter</option>
+                <option value="spray">Spray Emitter</option>
+            </select>
+        </label>
+    </fieldset>
+
+    <div id="canvas-container">
+        <canvas id="main-canvas"></canvas>
+    </div>
+
+</main>
 
 <script src="src/main.js" type="module"></script>
 </body>

@@ -52,7 +52,7 @@ export class Utils {
     }
 
     /**
-     * Linear interpolation between points a and b along t
+     * Linear interpolation between 2D vectors a and b along t
      * @param a
      * @param b
      * @param t
@@ -66,7 +66,7 @@ export class Utils {
     }
 
     /**
-     * Linear interpolation between 3d points a and b along t
+     * Linear interpolation 3D vectors a and b along t
      * @param a
      * @param b
      * @param t
