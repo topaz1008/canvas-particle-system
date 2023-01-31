@@ -28,17 +28,21 @@ export class Vec3 {
         return ((this.x * rhs.x) + (this.y * rhs.y) + (this.z * rhs.z));
     }
 
-    norm() {
+    magnitude() {
         return Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
     }
 
-    normSquared() {
+    magnitudeSquared() {
         return ((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
     }
 
     normalize() {
-        const invNorm = 1 / this.norm();
+        const invNorm = 1 / this.magnitude();
         return new Vec3(this.x * invNorm, this.y * invNorm, this.z * invNorm);
+    }
+
+    clone() {
+        return new Vec3(this.x, this.y, this.z);
     }
 
     static getRandom(min, max) {

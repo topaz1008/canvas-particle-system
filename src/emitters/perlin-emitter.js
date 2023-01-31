@@ -1,8 +1,10 @@
-import { Utils } from '../common/utils.js';
 import { module as noisejs } from '../../vendors/perlin.js';
-import { ParticleEmitter } from './particle-emitter.js';
+
+import { Utils } from '../common/utils.js';
 import { Particle } from '../particle.js';
+import { ParticleEmitter } from './particle-emitter.js';
 import { Vec2 } from '../math/vec2.js';
+import { Color } from '../common/color.js';
 
 export class PerlinEmitter extends ParticleEmitter {
     perlin = null;
@@ -37,9 +39,8 @@ export class PerlinEmitter extends ParticleEmitter {
         for (let i = 0; i < this.particleCount; i++) {
             const position = Vec2.getRandom(-150, 150);
 
-            const p = new Particle(this.position.add(position), 2, {
-                r: 255, g: 255, b: 255, a: 1
-            });
+            const color = new Color();
+            const p = new Particle(this.position.add(position), 2, color);
 
             p.timeToLive = Utils.getRandom(10, 20);
 

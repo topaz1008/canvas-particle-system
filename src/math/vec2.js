@@ -10,22 +10,12 @@ export class Vec2 {
         return new Vec2(this.x + rhs.x, this.y + rhs.y);
     }
 
-    addIP(rhs) {
-        this.x += rhs.x;
-        this.y += rhs.y;
-    }
-
     subtract(rhs) {
         return new Vec2(this.x - rhs.x, this.y - rhs.y);
     }
 
     multiply(t) {
         return new Vec2(this.x * t, this.y * t);
-    }
-
-    multiplyIP(t) {
-        this.x *= t;
-        this.y *= t;
     }
 
     divide(t) {
@@ -36,24 +26,21 @@ export class Vec2 {
         return ((this.x * rhs.x) + (this.y * rhs.y));
     }
 
-    norm() {
+    magnitude() {
         return Math.sqrt((this.x * this.x) + (this.y * this.y));
     }
 
-    normSquared() {
+    magnitudeSquared() {
         return ((this.x * this.x) + (this.y * this.y));
     }
 
     normalize() {
-        const invNorm = 1 / this.norm();
+        const invNorm = 1 / this.magnitude();
         return new Vec2(this.x * invNorm, this.y * invNorm);
     }
 
-    normalizeIP() {
-        // Normalize in place (faster)
-        const invNorm = 1 / this.norm();
-        this.x *= invNorm;
-        this.y *= invNorm;
+    clone() {
+        return new Vec2(this.x, this.y);
     }
 
     static getRandom(min, max) {

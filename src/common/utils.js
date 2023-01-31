@@ -14,6 +14,12 @@ export class Utils {
         return min + Math.random() * ((max) - min);
     }
 
+    static getRandomInt(min, max) {
+        const x = (min + Math.random() * (max + 1 - min));
+
+        return (x > 0) ? Math.floor(x) : Math.floor(x - 1);
+    }
+
     static tintImage(imageElement, tintColor) {
         const canvas = document.createElement('canvas'),
             context = canvas.getContext('2d');
@@ -21,6 +27,7 @@ export class Utils {
         canvas.width = imageElement.naturalWidth;
         canvas.height = imageElement.naturalHeight;
         if (canvas.width === 0 || canvas.height === 0) {
+            console.log('empty');
             return 'data:image/png;base64,';
         }
 

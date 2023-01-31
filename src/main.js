@@ -1,6 +1,7 @@
+import { ParticleSystem } from './particle-system.js';
+import { AttractingEmitter } from './emitters/attracting-emitter.js';
 import { ParticleEmitter } from './emitters/particle-emitter.js';
 import { PerlinEmitter } from './emitters/perlin-emitter.js';
-import { ParticleSystem } from './particle-system.js';
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
 
@@ -9,12 +10,20 @@ const VIEW_WIDTH = 1280,
 
 const PARTICLE_COUNT = 100;
 
+const emittersMap = {
+    simple: ParticleEmitter,
+    attracting: AttractingEmitter,
+    perlin: PerlinEmitter,
+    fireworks: null,
+    spray: null
+};
+
 // Globals
 const canvas = document.getElementById('main-canvas'),
     context = canvas.getContext('2d');
 
 let lastTime = Date.now(),
-    activeEmitterId = 'attracting',
+    activeEmitterType = 'attracting',
     system = new ParticleSystem(),
     viewWidth,
     viewHeight;
@@ -30,8 +39,8 @@ const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]')
 dropdownEmitterType.on('change', (e) => {
     e.preventDefault();
     const target = e.target;
-    console.log('emitter type', target.value);
-    activeEmitterId = target.value;
+    console.log(`Active emitter type: ${target.value}`);
+    activeEmitterType = target.value;
 });
 
 setViewportSize();
@@ -84,9 +93,14 @@ function setRenderStates() {
 }
 
 function addEmitter(numOfEmitters, numOfParticles, position) {
+
+    // Get the constructor for the active emitter type
+    const Constructor = emittersMap[activeEmitterType];
+
     for (let i = 0; i < numOfEmitters; i++) {
-        const emitter = new ParticleEmitter(position, numOfParticles, context);
+        const emitter = new Constructor(position, numOfParticles, context);
         emitter.init();
+
         system.addEmitter(emitter);
     }
 }
