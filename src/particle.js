@@ -14,8 +14,6 @@ export class ParticleUpdateMode {
     static KILL = 2;
 }
 
-// TODO: Allow selecting a emitter level color vs. a particle level color
-//       Also support loading the sprite from a url and base64 on a per emitter basis
 export class Particle {
     position = new Vec2(0, 0);
     velocity = new Vec2(0, 0);
@@ -117,6 +115,7 @@ export class Particle {
             }
 
         } else if (this.updateMode === ParticleUpdateMode.BOUNCE) {
+            // Bounce
             if (this.position.x > viewWidth - radius) {
                 this.position.x = viewWidth - radius;
                 this.velocity.x *= -1;
@@ -136,6 +135,7 @@ export class Particle {
             }
 
         } else if (this.updateMode === ParticleUpdateMode.KILL) {
+            // Kill
             if (this.position.x > viewWidth - radius || this.position.x < radius) {
                 this.dead = true;
             }
@@ -145,9 +145,10 @@ export class Particle {
             }
         }
 
-        this.color.a = (1 - this.timeAlive / this.timeToLive);
+        this.color.a = 1 - (this.timeAlive / this.timeToLive);
         this.size -= (this.timeAlive / this.timeToLive) * deltaTime;
         if (this.size <= 1) {
+            // Clamp the size to 1
             this.size = 1;
         }
     }
