@@ -1,8 +1,9 @@
-HTML5 Canvas Emitter Based Particle System
+An Extendable Emitter Based Particle System
 ==========================
 
-A live demo can be found [here](https://topaz1008.github.io/canvas-particle-system/).
-You can click the mouse anywhere to add a new emitter.
+A live demo can be found [HERE](https://topaz1008.github.io/canvas-particle-system/).
+
+The demo have many emitter types and some more explanations about this.
 
 Running
 ---------
