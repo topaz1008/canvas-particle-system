@@ -1,3 +1,8 @@
+/**
+ * This class is very straight-forward
+ * It handles updating all emitters that were added to it until the emitter is dead.
+ * There should really only be one instance of this in a scene.
+ */
 export class ParticleSystem {
     constructor() {
         this.emitters = [];

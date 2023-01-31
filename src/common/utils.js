@@ -27,7 +27,8 @@ export class Utils {
         canvas.width = imageElement.naturalWidth;
         canvas.height = imageElement.naturalHeight;
         if (canvas.width === 0 || canvas.height === 0) {
-            console.log('empty');
+            console.warn('Utils.tintImage(): ' +
+                'Trying to tint an image with a zero width or height; returning empty image.');
             return 'data:image/png;base64,';
         }
 

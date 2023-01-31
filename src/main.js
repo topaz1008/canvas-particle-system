@@ -1,5 +1,5 @@
 import { ParticleSystem } from './particle-system.js';
-import { SimpleEmitter } from './emitters/simple-emitter.js';
+import { BaseEmitter } from './emitters/base-emitter.js';
 import { AttractingEmitter } from './emitters/attracting-emitter.js';
 import { PerlinEmitter } from './emitters/perlin-emitter.js';
 import { SprayEmitter } from './emitters/spray-emitter.js';
@@ -18,7 +18,7 @@ const PARTICLE_COUNT = 100;
 
 // Dropdown value -> constructor map
 const emittersMap = {
-    simple: SimpleEmitter,
+    simple: BaseEmitter,
     attracting: AttractingEmitter,
     perlin: PerlinEmitter,
     spray: SprayEmitter,
@@ -45,9 +45,7 @@ btnClear.on('click', (e) => {
 const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]');
 dropdownEmitterType.on('change', (e) => {
     e.preventDefault();
-    const target = e.target;
-    console.log(`Active emitter type: ${target.value}`);
-    activeEmitterType = target.value;
+    activeEmitterType = e.target.value;
 });
 
 setViewportSize();

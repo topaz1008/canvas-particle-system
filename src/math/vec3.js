@@ -1,5 +1,8 @@
 import { Utils } from '../common/utils.js';
 
+/**
+ * 3D vector class.
+ */
 export class Vec3 {
     constructor(x, y, z) {
         this.x = x;

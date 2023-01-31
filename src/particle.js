@@ -9,13 +9,19 @@ const PARTICLE_IMAGE_DATA = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAA
 const originalImage = new Image();
 originalImage.src = PARTICLE_IMAGE_DATA;
 
+/**
+ * Particle update mode enum
+ * What to do when a particle leaves the screen bounds.
+ */
 export class ParticleUpdateMode {
-    // What to do when a particle leaves the screen bounds.
     static BOUNCE = 0;
     static WARP = 1;
     static KILL = 2;
 }
 
+/**
+ * This class represents a single particle.
+ */
 export class Particle {
     position = new Vec2(0, 0);
     velocity = new Vec2(0, 0);
@@ -79,6 +85,8 @@ export class Particle {
     }
 
     /**
+     * Draw the particle on the passed context.
+     *
      * @param context {CanvasRenderingContext2D}
      */
     draw(context) {
@@ -97,6 +105,8 @@ export class Particle {
     }
 
     /**
+     * Constraints the particle to screen bounds and selected update method.
+     *
      * @param context {CanvasRenderingContext2D}
      * @param deltaTime {Number}
      * @param bounce {Boolean=}

@@ -2,11 +2,11 @@ import { module as noisejs } from '../../vendors/perlin.js';
 
 import { Utils } from '../common/utils.js';
 import { Particle } from '../particle.js';
-import { SimpleEmitter } from './simple-emitter.js';
+import { BaseEmitter } from './base-emitter.js';
 import { Vec2 } from '../math/vec2.js';
 import { Color } from '../common/color.js';
 
-export class PerlinEmitter extends SimpleEmitter {
+export class PerlinEmitter extends BaseEmitter {
     perlin = null;
 
     constructor(position, particleCount, context) {

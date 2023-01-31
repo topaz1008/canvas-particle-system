@@ -2,9 +2,9 @@ import { Particle } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
-import { SimpleEmitter } from './simple-emitter.js';
+import { BaseEmitter } from './base-emitter.js';
 
-export class AttractingEmitter extends SimpleEmitter {
+export class AttractingEmitter extends BaseEmitter {
 
     constructor(position, particleCount, context) {
         super(position, particleCount, context);

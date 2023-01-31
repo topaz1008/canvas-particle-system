@@ -3,11 +3,22 @@ import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
 
-export class SimpleEmitter {
+/**
+ * The base emitter class; all other emitters should inherit from this class
+ * Although they don't have to.
+ *
+ * TODO: there is still some common functionality this class can provide
+ */
+export class BaseEmitter {
     position = new Vec2(0, 0);
     dead = false;
     theta = 0;
 
+    /**
+     * @param position {Vec2}
+     * @param particleCount {Number}
+     * @param context {CanvasRenderingContext2D}
+     */
     constructor(position, particleCount, context) {
         this.position = position;
         this.particles = new Array(particleCount);
@@ -16,6 +27,9 @@ export class SimpleEmitter {
         this.context = context;
     }
 
+    /**
+     * Any setup we want to do before starting to update this emitter.
+     */
     init() {
         for (let i = 0; i < this.particleCount; i++) {
             const color = new Color(
@@ -40,6 +54,11 @@ export class SimpleEmitter {
         }
     }
 
+    /**
+     * This function will be called every frame by the ParticleSystem class
+     *
+     * @param deltaTime {Number}
+     */
     update(deltaTime) {
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];

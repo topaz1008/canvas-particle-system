@@ -2,9 +2,9 @@ import { Particle, ParticleUpdateMode } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
-import { SimpleEmitter } from './simple-emitter.js';
+import { BaseEmitter } from './base-emitter.js';
 
-export class FireworksEmitter extends SimpleEmitter {
+export class FireworksEmitter extends BaseEmitter {
     emitterTimeAlive = 0;
     emitterTimeToLive = 3;
 

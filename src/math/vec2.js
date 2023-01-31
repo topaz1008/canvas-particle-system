@@ -1,5 +1,8 @@
 import { Utils } from '../common/utils.js';
 
+/**
+ * 2D vector class.
+ */
 export class Vec2 {
     constructor(x, y) {
         this.x = x;
