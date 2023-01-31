@@ -5,13 +5,13 @@ import { Color } from '../common/color.js';
 
 export class SimpleEmitter {
     position = new Vec2(0, 0);
+    dead = false;
     theta = 0;
 
     constructor(position, particleCount, context) {
         this.position = position;
         this.particles = new Array(particleCount);
         this.particleCount = particleCount;
-        this.dead = false;
 
         this.context = context;
     }
