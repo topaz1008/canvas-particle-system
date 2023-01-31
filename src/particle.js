@@ -50,7 +50,6 @@ export class Particle {
         context.globalAlpha = (1 - this.timeAlive / this.timeToLive);
 
         context.translate(this.position.x, this.position.y);
-        // this.img.src = tintImage(this.img, makeRGBA(this.rgbaColor.r, this.rgbaColor.g, this.rgbaColor.b, alpha));
         context.drawImage(this.img, 0, 0, this.img.width * this.size, this.img.height * this.size);
         context.restore();
     }

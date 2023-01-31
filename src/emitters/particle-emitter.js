@@ -1,7 +1,7 @@
-import { Particle } from './particle.js';
-import { Vec2 } from './math/vec2.js';
-import { Vec3 } from './math/vec3.js';
-import { Utils } from './common/utils.js';
+import { Particle } from '../particle.js';
+import { Vec2 } from '../math/vec2.js';
+import { Vec3 } from '../math/vec3.js';
+import { Utils } from '../common/utils.js';
 
 export class ParticleEmitter {
     position = new Vec2(0, 0);
@@ -17,7 +17,7 @@ export class ParticleEmitter {
         //this.startColor = new Vec3(Utils.getRandom(50, 255), Utils.getRandom(50, 255), Utils.getRandom(50, 255));
         //this.endColor = new Vec3(Utils.getRandom(50, 255), Utils.getRandom(50, 255), Utils.getRandom(50, 255));
 
-        this.init();
+        // this.init();
     }
 
     init() {

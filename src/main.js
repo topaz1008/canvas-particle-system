@@ -1,4 +1,5 @@
-import { ParticleEmitter } from './particle-emitter.js';
+import { ParticleEmitter } from './emitters/particle-emitter.js';
+import { PerlinEmitter } from './emitters/perlin-emitter.js';
 import { ParticleSystem } from './particle-system.js';
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
@@ -6,18 +7,23 @@ import { Vec2 } from './math/vec2.js';
 const VIEW_WIDTH = 1280,
     VIEW_HEIGHT = 720;
 
+const PARTICLE_COUNT = 100;
+
 // Globals
 const canvas = document.getElementById('main-canvas'),
     context = canvas.getContext('2d');
 
 let lastTime = Date.now(),
+    activeEmitterId = 'attracting',
+    system = new ParticleSystem(),
     viewWidth,
     viewHeight;
 
+// Set up the gui
 const btnClear = new UIControlElement('#btn-clear[role=button]');
 btnClear.on('click', (e) => {
     e.preventDefault();
-    console.log('clear');
+    system = new ParticleSystem();
 });
 
 const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]');
@@ -25,9 +31,8 @@ dropdownEmitterType.on('change', (e) => {
     e.preventDefault();
     const target = e.target;
     console.log('emitter type', target.value);
+    activeEmitterId = target.value;
 });
-
-const system = new ParticleSystem();
 
 setViewportSize();
 setRenderStates();
@@ -38,13 +43,14 @@ window.addEventListener('resize', (e) => {
 
 }, false);
 
-window.onload = (e) => {
-    addEmitter(1, new Vec2(canvas.width / 2, canvas.height / 2));
-};
+window.addEventListener('DOMContentLoaded', (e) => {
+    // Add emitter on load
+    addEmitter(1, PARTICLE_COUNT, new Vec2(canvas.width / 2, canvas.height / 2));
+});
 
 canvas.addEventListener('mousedown', (e) => {
 
-    addEmitter(1, new Vec2(e.offsetX, e.offsetY));
+    addEmitter(1, PARTICLE_COUNT, new Vec2(e.offsetX, e.offsetY));
 
 }, false);
 
@@ -65,7 +71,6 @@ function update(time) {
     requestAnimationFrame(update);
 }
 
-
 // Set canvas and view size
 function setViewportSize() {
     canvas.width = viewWidth = VIEW_WIDTH;
@@ -78,10 +83,10 @@ function setRenderStates() {
     context.imageSmoothingEnabled = false;
 }
 
-function addEmitter(num, position) {
-    const COUNT = 100;
-    for (let i = 0; i < num; i++) {
-        const emitter = new ParticleEmitter(position, COUNT, context);
+function addEmitter(numOfEmitters, numOfParticles, position) {
+    for (let i = 0; i < numOfEmitters; i++) {
+        const emitter = new ParticleEmitter(position, numOfParticles, context);
+        emitter.init();
         system.addEmitter(emitter);
     }
 }
