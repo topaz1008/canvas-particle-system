@@ -1,23 +1,28 @@
 import { ParticleSystem } from './particle-system.js';
-import { AttractingEmitter } from './emitters/attracting-emitter.js';
 import { SimpleEmitter } from './emitters/simple-emitter.js';
+import { AttractingEmitter } from './emitters/attracting-emitter.js';
 import { PerlinEmitter } from './emitters/perlin-emitter.js';
 import { SprayEmitter } from './emitters/spray-emitter.js';
+import { FireworksEmitter } from './emitters/fireworks-emitter.js';
 
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
 
+// App constants
 const VIEW_WIDTH = 1280,
     VIEW_HEIGHT = 720;
 
+// Most emitter types will only create this many particles
+// unless they create particles on-the-fly; then this is ignored
 const PARTICLE_COUNT = 100;
 
+// Dropdown value -> constructor map
 const emittersMap = {
     simple: SimpleEmitter,
     attracting: AttractingEmitter,
     perlin: PerlinEmitter,
     spray: SprayEmitter,
-    fireworks: null
+    fireworks: FireworksEmitter
 };
 
 // Globals

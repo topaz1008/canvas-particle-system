@@ -21,6 +21,12 @@ body {
     padding-top: 0;
 }
 
+#img-particle {
+    background-color: rgb(255, 255, 255);
+    width: 32px;
+    height: 32px;
+}
+
 header {
     padding-bottom: 0 !important;
 }

@@ -14,14 +14,24 @@
 <header>
     <h2>Emitter Based Particle System</h2>
     <details open>
-<!--    <details>-->
+        <!--    <details>-->
         <summary>About</summary>
-        <p>You can select an emitter type from the dropdown below and click the mouse anywhere on the canvas to add a new emitter at that position.</p>
+        <p>You can select an emitter type from the dropdown below and click the mouse anywhere on the canvas to add a
+            new emitter at that position.</p>
+        <p>This system is designed to be flexible and extendable; one only needs to implement the emitter class and its 2 main
+            methods to create nearly an infinite number of particle effects.</p>
+        <p>All emitter types use the same single PNG image. All color, size and alpha transforms are done on-the-fly
+            programmatically.</p>
+        <p>This is the single PNG image used for all emitters &nbsp;<img id="img-particle" src="assets/particle.png"
+                                                                         alt="">&nbsp; scaled to 32x32; its original
+            size is 16x16</p>
     </details>
     <details>
         <summary>Source Code and Credits</summary>
-        <p>Source code can be found on my <a href="https://github.com/topaz1008/canvas-particle-system/" target="_blank">GitHub</a>.</p>
-        <p>Credits: This demo is Using <a href="https://github.com/josephg/noisejs" target="_blank">noisejs</a> by josephg for generating the perlin noise.</p>
+        <p>Source code can be found on my <a href="https://github.com/topaz1008/canvas-particle-system/"
+                                             target="_blank">GitHub</a>.</p>
+        <p>Credits: This demo is Using <a href="https://github.com/josephg/noisejs" target="_blank">noisejs</a> by
+            josephg for generating the perlin noise.</p>
     </details>
 </header>
 
@@ -37,10 +47,11 @@
         <label>
             <select id="emitter-type" role="combobox" data-action="change">
                 <option value="attracting" selected>Attracting Emitter</option>
+                <option value="fireworks">Fireworks Emitter</option>
                 <option value="spray">Spray Emitter</option>
                 <option value="simple">Simple Emitter</option>
-                <option value="perlin">Perlin Emitter</option>
-                <option value="fireworks">Fireworks Emitter</option>
+                    <!-- TODO: uncomment this when perlin is working properly -->
+<!--                <option value="perlin">Perlin Emitter</option>-->
             </select>
         </label>
     </fieldset>
