@@ -1,7 +1,9 @@
 import { ParticleSystem } from './particle-system.js';
 import { AttractingEmitter } from './emitters/attracting-emitter.js';
-import { ParticleEmitter } from './emitters/particle-emitter.js';
+import { SimpleEmitter } from './emitters/simple-emitter.js';
 import { PerlinEmitter } from './emitters/perlin-emitter.js';
+import { SprayEmitter } from './emitters/spray-emitter.js';
+
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
 
@@ -11,11 +13,11 @@ const VIEW_WIDTH = 1280,
 const PARTICLE_COUNT = 100;
 
 const emittersMap = {
-    simple: ParticleEmitter,
+    simple: SimpleEmitter,
     attracting: AttractingEmitter,
     perlin: PerlinEmitter,
-    fireworks: null,
-    spray: null
+    spray: SprayEmitter,
+    fireworks: null
 };
 
 // Globals

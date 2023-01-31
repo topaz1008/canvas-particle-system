@@ -2,17 +2,12 @@ import { Particle } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
+import { SimpleEmitter } from './simple-emitter.js';
 
-export class AttractingEmitter {
-    position = new Vec2(0, 0);
+export class AttractingEmitter extends SimpleEmitter {
 
     constructor(position, particleCount, context) {
-        this.position = position;
-        this.particles = new Array(particleCount);
-        this.particleCount = particleCount;
-        this.dead = false;
-
-        this.context = context;
+        super(position, particleCount, context);
     }
 
     init() {
@@ -74,33 +69,8 @@ export class AttractingEmitter {
                 p.position.x += p.velocity.x * deltaTime;
                 p.position.y += p.velocity.y * deltaTime;
 
-                // Bounce off boundaries
-                const halfSize = p.size / 2;
-                const viewWidth = this.context.width;
-                const viewHeight = this.context.height;
-                if (p.position.x > viewWidth - halfSize) {
-                    p.position.x = viewWidth - halfSize;
-                    p.velocity.x *= -1;
-
-                } else if (p.position.x < halfSize) {
-                    p.position.x = halfSize;
-                    p.velocity.x *= -1;
-                }
-
-                if (p.position.y > viewHeight - halfSize) {
-                    p.position.y = viewHeight - halfSize;
-                    p.velocity.y *= -1;
-
-                } else if (p.position.y < halfSize) {
-                    p.position.y = halfSize;
-                    p.velocity.y *= -1;
-                }
-
-                p.color.a = (1 - p.timeAlive / p.timeToLive);
-                p.size -= (p.timeAlive / p.timeToLive) * deltaTime;
-                if (p.size <= 1) {
-                    p.size = 1;
-                }
+                // Constraint to screen boundaries
+                p.constraint(this.context, deltaTime);
 
                 p.draw(this.context);
             }

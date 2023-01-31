@@ -3,7 +3,7 @@ import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
 
-export class ParticleEmitter {
+export class SimpleEmitter {
     position = new Vec2(0, 0);
     theta = 0;
 
@@ -55,36 +55,8 @@ export class ParticleEmitter {
                 p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime));
                 p.position = p.position.add(p.velocity);
 
-                // Bounce off boundaries
-                // TODO: Refactor this and any other duplications
-                //        into Particle class; support both bounce and warping
-                const halfSize = p.size / 2;
-                const viewWidth = this.context.width;
-                const viewHeight = this.context.height;
-                if (p.position.x > viewWidth - halfSize) {
-                    p.position.x = viewWidth - halfSize;
-                    p.velocity.x *= -1;
-
-                } else if (p.position.x < halfSize) {
-                    p.position.x = halfSize;
-                    p.velocity.x *= -1;
-                }
-
-                if (p.position.y > viewHeight - halfSize) {
-                    p.position.y = viewHeight - halfSize;
-                    p.velocity.y *= -1;
-
-                } else if (p.position.y < halfSize) {
-                    p.position.y = halfSize;
-                    p.velocity.y *= -1;
-                }
-
-                p.color.a = (1 - p.timeAlive / p.timeToLive);
-                p.size -= (p.timeAlive / p.timeToLive) * deltaTime;
-                if (p.size <= 1) {
-                    p.size = 1;
-                }
-
+                // Constraint to screen boundaries
+                p.constraint(this.context, deltaTime);
                 p.draw(this.context);
             }
 
