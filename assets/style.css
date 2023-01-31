@@ -38,3 +38,6 @@ label > button {
 p {
     margin-bottom: 20px
 }
+.strike {
+    text-decoration: line-through;
+}

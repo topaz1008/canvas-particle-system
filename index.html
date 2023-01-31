@@ -18,7 +18,8 @@
         <summary>About</summary>
         <p>You can select an emitter type from the dropdown below and click the mouse anywhere on the canvas to add a
             new emitter at that position.</p>
-        <p>This system is designed to be flexible and extendable; one only needs to implement the emitter class and its 2 main
+        <p>This system is designed to be flexible and extendable; one only needs to implement the emitter class and its
+            2 main
             methods to create nearly an infinite number of particle effects.</p>
         <p>All emitter types use the same single PNG image. All color, size and alpha transforms are done on-the-fly
             programmatically.</p>
@@ -30,8 +31,9 @@
         <summary>Source Code and Credits</summary>
         <p>Source code can be found on my <a href="https://github.com/topaz1008/canvas-particle-system/"
                                              target="_blank">GitHub</a>.</p>
-        <p>Credits: This demo is Using <a href="https://github.com/josephg/noisejs" target="_blank">noisejs</a> by
-            josephg for generating the perlin noise.</p>
+        <p><span class="strike">Credits: This demo is Using <a href="https://github.com/josephg/noisejs"
+                                                               target="_blank">noisejs</a> by
+            josephg for generating the perlin noise.</span> PerlinEmitter is still WIP.</p>
     </details>
 </header>
 
@@ -50,8 +52,8 @@
                 <option value="fireworks">Fireworks Emitter</option>
                 <option value="spray">Spray Emitter</option>
                 <option value="simple">Simple Emitter</option>
-                    <!-- TODO: uncomment this when perlin is working properly -->
-<!--                <option value="perlin">Perlin Emitter</option>-->
+                <!-- TODO: uncomment this when perlin is working properly -->
+                <!--<option value="perlin">Perlin Emitter</option>-->
             </select>
         </label>
     </fieldset>
