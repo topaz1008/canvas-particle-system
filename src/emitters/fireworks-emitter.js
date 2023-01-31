@@ -71,7 +71,7 @@ export class FireworksEmitter extends BaseEmitter {
             }
 
             if (p.dead === false) {
-                p.rotation += (2.5 * Math.atan2(p.velocity.y, p.velocity.x) - this.theta) * (180 / Math.PI) * deltaTime;
+                p.rotation += (2.5 * Math.atan2(p.velocity.y, p.velocity.x) - this.theta) * deltaTime;
 
                 const acceleration = new Vec2(
                     10 * Math.cos(p.rotation - this.theta),
@@ -93,7 +93,7 @@ export class FireworksEmitter extends BaseEmitter {
 
                 // Constraint to screen boundaries
                 p.constraint(this.context, deltaTime, false);
-                p.draw(this.context);
+                p.draw(this.context, false);
             }
 
             if (p.dead === true) {

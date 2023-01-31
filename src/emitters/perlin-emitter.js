@@ -78,7 +78,7 @@ export class PerlinEmitter extends BaseEmitter {
                 p.position.x += p.velocity.x * 1000;
                 p.position.y += p.velocity.y * 1000;
 
-                p.draw(this.context);
+                p.draw(this.context, false);
             }
 
             if (p.dead === true) {

@@ -78,8 +78,8 @@ export class SprayEmitter extends BaseEmitter {
                 p.position = p.position.add(p.velocity);
 
                 // Constraint to screen boundaries
-                p.constraint(this.context, deltaTime, false);
-                p.draw(this.context);
+                p.constraint(this.context, deltaTime, true);
+                p.draw(this.context, false);
             }
 
             if (p.dead === true) {

@@ -88,14 +88,20 @@ export class Particle {
      * Draw the particle on the passed context.
      *
      * @param context {CanvasRenderingContext2D}
+     * @param rotate {Boolean}
      */
-    draw(context) {
+    draw(context, rotate) {
         if (!this.imageLoaded) return;
 
         context.save();
         context.globalAlpha = (1 - this.timeAlive / this.timeToLive);
 
+        context.resetTransform();
         context.translate(this.position.x, this.position.y);
+        if (rotate === true) {
+            context.rotate(this.rotation);
+        }
+
         context.drawImage(this.img, 0, 0, this.img.width * this.size, this.img.height * this.size);
         context.restore();
     }

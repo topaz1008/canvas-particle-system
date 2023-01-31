@@ -76,7 +76,7 @@ export class BaseEmitter {
 
                 // Constraint to screen boundaries
                 p.constraint(this.context, deltaTime);
-                p.draw(this.context);
+                p.draw(this.context, true);
             }
 
             if (p.dead === true) {
