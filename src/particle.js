@@ -10,8 +10,8 @@ originalImage.src = PARTICLE_IMAGE_DATA;
 export class ParticleUpdateMode {
     // What to do when a particle leaves the screen bounds.
     static BOUNCE = 0;
-    static WARP = 0;
-    static KILL = 0;
+    static WARP = 1;
+    static KILL = 2;
 }
 
 // TODO: Allow selecting a emitter level color vs. a particle level color
