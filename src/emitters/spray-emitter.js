@@ -21,11 +21,7 @@ export class SprayEmitter extends BaseEmitter {
         };
 
         // Color
-        this.color = new Color(
-            Utils.getRandom(30, 255),
-            Utils.getRandom(30, 255),
-            Utils.getRandom(30, 255)
-        );
+        this.color = Color.getRandom(30);
     }
 
     init() {
@@ -59,10 +55,8 @@ export class SprayEmitter extends BaseEmitter {
             if (!p) continue;
 
             p.rotation += this.theta;
-            p.timeAlive += deltaTime;
-            if (p.timeAlive >= p.timeToLive) {
-                p.dead = true;
-            }
+
+            p.update(deltaTime);
 
             if (p.dead === false) {
                 p.rotation += (2.5 * Math.atan2(p.velocity.y, p.velocity.x) - this.theta) * (180 / Math.PI) * deltaTime;

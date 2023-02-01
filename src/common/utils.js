@@ -20,6 +20,14 @@ export class Utils {
         return (x > 0) ? Math.floor(x) : Math.floor(x - 1);
     }
 
+    /**
+     * Tints an image with the specified color
+     * and return it as a base64 string.
+     *
+     * @param imageElement {HTMLImageElement}
+     * @param tintColor {String}
+     * @returns {String}
+     */
     static tintImage(imageElement, tintColor) {
         const canvas = document.createElement('canvas'),
             context = canvas.getContext('2d');
@@ -28,7 +36,7 @@ export class Utils {
         canvas.height = imageElement.naturalHeight;
         if (canvas.width === 0 || canvas.height === 0) {
             console.warn('Utils.tintImage(): ' +
-                'Trying to tint an image with a zero width or height; returning empty image.');
+                'Trying to tint an image with a zero width or height; returning an empty image string.');
             return 'data:image/png;base64,';
         }
 
@@ -60,11 +68,12 @@ export class Utils {
     }
 
     /**
-     * Linear interpolation between 2D vectors a and b along t
-     * @param a
-     * @param b
-     * @param t
-     * @return
+     * Linear interpolation between 2D vectors a and b along t.
+     *
+     * @param a {Vec2}
+     * @param b {Vec2}
+     * @param t {Number}
+     * @return {Vec2}
      */
     static vec2Lerp(a, b, t) {
         const x = a.x + t * (b.x - a.x);
@@ -74,11 +83,12 @@ export class Utils {
     }
 
     /**
-     * Linear interpolation 3D vectors a and b along t
-     * @param a
-     * @param b
-     * @param t
-     * @return
+     * Linear interpolation 3D vectors a and b along t.
+     *
+     * @param a {Vec3}
+     * @param b {Vec3}
+     * @param t {Number}
+     * @return {Vec3}
      */
     static vec3Lerp(a, b, t) {
         const x = a.x + t * (b.x - a.x);

@@ -21,11 +21,7 @@ export class FireworksEmitter extends BaseEmitter {
         };
 
         // Color
-        this.color = new Color(
-            Utils.getRandom(30, 255),
-            Utils.getRandom(30, 255),
-            Utils.getRandom(30, 255)
-        );
+        this.color = Color.getRandom(30);
     }
 
     init() {
@@ -38,15 +34,16 @@ export class FireworksEmitter extends BaseEmitter {
 
         // Create a new particle with a 15% chance until the emitter is dead
         if (Math.random() > 0.85) {
+            // Jitter the particle's position a little
             const position = this.position.add(Vec2.getRandom(-3, 3));
             const p = new Particle(position, Utils.getRandom(0.2, 0.75), this.color, this.options);
-
-            p.explodeAfter = Utils.getRandom(0.1, 0.3);
 
             p.velocity = new Vec2(Utils.getRandom(-3, 3), Utils.getRandom(-15, -10))
                 .normalize()
                 .multiply(Utils.getRandom(20, 30));
 
+            // Random explode time
+            p.explodeAfter = Utils.getRandom(0.1, 0.3);
             p.exploded = false;
 
             // Size and lifetime
@@ -65,10 +62,7 @@ export class FireworksEmitter extends BaseEmitter {
             if (!p) continue;
 
             p.rotation += this.theta;
-            p.timeAlive += deltaTime;
-            if (p.timeAlive >= p.timeToLive) {
-                p.dead = true;
-            }
+            p.update(deltaTime);
 
             if (p.dead === false) {
                 p.rotation += (2.5 * Math.atan2(p.velocity.y, p.velocity.x) - this.theta) * deltaTime;
@@ -109,22 +103,20 @@ export class FireworksEmitter extends BaseEmitter {
     }
 
     #createExplosion(position) {
-        const COUNT = 15;
+        const COUNT = 25;
         const options = {
             singleColor: true,
             updateMode: ParticleUpdateMode.KILL
         };
         for (let i = 0; i < COUNT; i++) {
-            const color = new Color(
-                Utils.getRandomInt(30, 255),
-                Utils.getRandomInt(30, 255),
-                Utils.getRandomInt(30, 255)
-            );
+            const color = Color.getRandom(30);
             const p = new Particle(position.clone(), Utils.getRandom(0.7, 1.5), color, options);
 
             // p.velocity = Vec2.getRandom(-3, 3)
             //     .normalize()
             //     .multiply(Utils.getRandom(30, 50));
+
+            // Get a random velocity on the unit circle and randomly scale it
             p.velocity = new Vec2(
                 Math.cos(2 * i / Math.PI - Utils.getRandom(-Math.PI, Math.PI)),
                 Math.sin(2 * i / Math.PI - Utils.getRandom(-Math.PI, Math.PI)))

@@ -4,16 +4,28 @@ import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
 import { BaseEmitter } from './base-emitter.js';
 
-export class AttractingEmitter extends BaseEmitter {
+export class TunnelEmitter extends BaseEmitter {
 
     constructor(position, particleCount, context) {
         super(position, particleCount, context);
+
+        this.particleCount = 150;
     }
 
     init() {
-        const color = Color.getRandom(30);
+        const color = Color.getRandom(64);
         for (let i = 0; i < this.particleCount; i++) {
-            const p = new Particle(this.position.add(Vec2.getRandom(-150, 150)), 2, color);
+            // const p = new Particle(this.position.clone(), 2, color);
+            //
+            // p.velocity = Vec2.getRandom(-2, 2)
+            //     .normalize()
+            //     .multiply(Utils.getRandom(45, 55));
+            //
+            // p.timeToLive = Utils.getRandom(5, 8);
+            // p.size = Utils.getRandom(0.5, 1.5);
+            //
+            // this.particles[i] = p;
+            const p = new Particle(this.position.add(Vec2.getRandom(-100, 100)), 2, color);
 
             p.acceleration.x = Utils.getRandom(-10, 10);
             p.acceleration.y = Utils.getRandom(-10, 10);
@@ -51,7 +63,10 @@ export class AttractingEmitter extends BaseEmitter {
 
                 p.velocity = p.velocity.add(g.normalize().multiply(gl));
 
-                p.position = p.position.add(p.velocity.multiply(deltaTime));
+                // p.position = p.position.add(p.velocity.multiply(deltaTime));
+
+                // p.position.x = p.position.add(p.velocity.multiply(deltaTime)).x;
+                p.position.x += p.velocity.x * deltaTime;
 
                 // Constraint to screen boundaries
                 p.constraint(this.context, deltaTime);

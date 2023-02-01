@@ -21,6 +21,11 @@ export class ParticleUpdateMode {
 
 /**
  * This class represents a single particle.
+ *
+ * TODO: Optimize image tinting.
+ *       Create enough tinted images a head of time which
+ *       can be referenced quickly instead of tinting in real-time.
+ *       Can randomly create ~100 colored images and randomly select between them when needed.
  */
 export class Particle {
     position = new Vec2(0, 0);
@@ -47,7 +52,9 @@ export class Particle {
         this.timeToLive = 0;
         this.timeAlive = 0;
 
-        // FIXME: temp
+        // FIXME: temp; handle options properly
+        //        maybe move all constructor
+        //        parameters to the options object.
         if (!options) {
             options = {
                 singleColor: true,
@@ -108,6 +115,18 @@ export class Particle {
 
     update(deltaTime) {
         // TODO: implement this; move stuff from constraint() that doesnt belong there
+        this.timeAlive += deltaTime;
+        if (this.timeAlive >= this.timeToLive) {
+            this.dead = true;
+            return;
+        }
+
+        this.color.a = 1 - (this.timeAlive / this.timeToLive);
+        this.size -= (this.timeAlive / this.timeToLive) * deltaTime;
+        if (this.size <= 1) {
+            // Clamp the size to 1
+            this.size = 1;
+        }
     }
 
     /**
@@ -165,14 +184,6 @@ export class Particle {
             if (this.position.y > viewHeight - radius || this.position.y < radius) {
                 this.dead = true;
             }
-        }
-
-        // FIXME: Move to update()
-        this.color.a = 1 - (this.timeAlive / this.timeToLive);
-        this.size -= (this.timeAlive / this.timeToLive) * deltaTime;
-        if (this.size <= 1) {
-            // Clamp the size to 1
-            this.size = 1;
         }
     }
 }

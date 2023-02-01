@@ -7,6 +7,7 @@ import { FireworksEmitter } from './emitters/fireworks-emitter.js';
 
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
+import { TunnelEmitter } from './emitters/tunnel-emitter.js';
 
 // App constants
 const VIEW_WIDTH = 1280,
@@ -22,7 +23,8 @@ const emittersMap = {
     attracting: AttractingEmitter,
     perlin: PerlinEmitter,
     spray: SprayEmitter,
-    fireworks: FireworksEmitter
+    fireworks: FireworksEmitter,
+    tunnel: TunnelEmitter
 };
 
 // Globals
@@ -39,7 +41,7 @@ let lastTime = Date.now(),
 const btnClear = new UIControlElement('#btn-clear[role=button]');
 btnClear.on('click', (e) => {
     e.preventDefault();
-    system = new ParticleSystem();
+    system.clear();
 });
 
 const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]');

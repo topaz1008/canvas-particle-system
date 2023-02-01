@@ -1,3 +1,5 @@
+import { Utils } from './utils.js';
+
 /**
  * Simple color class for simple color manipulations.
  */
@@ -48,6 +50,13 @@ export class Color {
         return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
     }
 
+    /**
+     * Parses a string of a form rgb(128, 128, 128)
+     * and returns a new Color object.
+     *
+     * @param str {String}
+     * @returns {Color}
+     */
     static fromString(str) {
         const regex = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i;
 
@@ -64,5 +73,20 @@ export class Color {
         const a = 255;
 
         return new Color(r, g, b, a);
+    }
+
+    /**
+     * Returns a random color.
+     *
+     * @param min {Number=} The minimum value to consider for each channel
+     * @returns {Color}
+     */
+    static getRandom(min) {
+        min = min || 1;
+        const r = Utils.getRandomInt(min, 255);
+        const g = Utils.getRandomInt(min, 255);
+        const b = Utils.getRandomInt(min, 255);
+
+        return new Color(r, g, b, 1);
     }
 }

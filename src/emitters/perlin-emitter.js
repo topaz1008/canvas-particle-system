@@ -53,10 +53,7 @@ export class PerlinEmitter extends BaseEmitter {
             const p = this.particles[i];
             if (!p) continue;
 
-            p.timeAlive += deltaTime;
-            if (p.timeAlive >= p.timeToLive) {
-                p.dead = true;
-            }
+            p.update(deltaTime);
 
             if (p.dead === false) {
                 p.rotation += deltaTime;

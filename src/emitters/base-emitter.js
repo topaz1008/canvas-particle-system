@@ -32,11 +32,7 @@ export class BaseEmitter {
      */
     init() {
         for (let i = 0; i < this.particleCount; i++) {
-            const color = new Color(
-                Utils.getRandom(30, 255),
-                Utils.getRandom(30, 255),
-                Utils.getRandom(30, 255)
-            );
+            const color = Color.getRandom(30);
 
             const size = Utils.getRandom(0.5, 2);
 
@@ -64,14 +60,11 @@ export class BaseEmitter {
             const p = this.particles[i];
             if (!p) continue;
 
-            p.timeAlive += deltaTime;
-            if (p.timeAlive >= p.timeToLive) {
-                p.dead = true;
-            }
+            p.update(deltaTime);
 
             if (p.dead === false) {
                 p.acceleration = p.acceleration.add(Vec2.getRandom(-5, 5));
-                p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime));
+                p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime * deltaTime));
                 p.position = p.position.add(p.velocity);
 
                 // Constraint to screen boundaries
