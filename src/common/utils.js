@@ -3,19 +3,16 @@ import { Vec3 } from '../math/vec3.js';
 
 export class Utils {
     static makeRGBA(r, g, b, a) {
-        return ('rgba(R, G, B, A)')
-            .replace('R', (r | r).toString())
-            .replace('G', (g | g).toString())
-            .replace('B', (b | b).toString())
-            .replace('A', a.toString());
+        // x | x = faster Math.floor(x)
+        return `rgba(${r | r}, ${g | g}, ${b | b}, ${a})`;
     }
 
     static getRandom(min, max) {
-        return min + Math.random() * ((max) - min);
+        return min + Math.random() * (max - min);
     }
 
     static getRandomInt(min, max) {
-        const x = (min + Math.random() * (max + 1 - min));
+        const x = min + Math.random() * (max + 1 - min);
 
         return (x > 0) ? Math.floor(x) : Math.floor(x - 1);
     }

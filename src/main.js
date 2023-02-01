@@ -25,6 +25,7 @@ const emittersMap = {
     spray: SprayEmitter,
     fireworks: FireworksEmitter,
     tunnel: TunnelEmitter
+    // TODO: Add mouse emitter (like a mouse trail)
 };
 
 // Globals

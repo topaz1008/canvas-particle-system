@@ -82,7 +82,7 @@ export class Color {
      * @returns {Color}
      */
     static getRandom(min) {
-        min = min || 1;
+        min = (min) ? min : 0;
         const r = Utils.getRandomInt(min, 255);
         const g = Utils.getRandomInt(min, 255);
         const b = Utils.getRandomInt(min, 255);

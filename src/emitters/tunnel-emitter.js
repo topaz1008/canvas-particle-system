@@ -65,8 +65,8 @@ export class TunnelEmitter extends BaseEmitter {
 
                 // p.position = p.position.add(p.velocity.multiply(deltaTime));
 
-                // p.position.x = p.position.add(p.velocity.multiply(deltaTime)).x;
                 p.position.x += p.velocity.x * deltaTime;
+                p.position.y += -p.velocity.y * deltaTime * deltaTime;
 
                 // Constraint to screen boundaries
                 p.constraint(this.context, deltaTime);

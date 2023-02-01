@@ -23,8 +23,8 @@ export class ParticleUpdateMode {
  * This class represents a single particle.
  *
  * TODO: Optimize image tinting.
- *       Create enough tinted images a head of time which
- *       can be referenced quickly instead of tinting in real-time.
+ *       Create enough tinted images ahead of time which
+ *       can then be referenced quickly instead of tinting in real-time.
  *       Can randomly create ~100 colored images and randomly select between them when needed.
  */
 export class Particle {
