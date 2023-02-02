@@ -131,13 +131,13 @@ export class FireworksEmitter extends BaseEmitter {
                 Math.cos(2 * i / Math.PI),
                 Math.sin(2 * i / Math.PI))
                 .normalize()
-                .multiply(Utils.getRandom(2, 9));
+                .multiply(Utils.getRandom(2, 4));
 
             if (type === 0) {
-                p.timeToLive = Utils.getRandom(0.1, 0.2);
+                p.timeToLive = Utils.getRandom(0.2, 0.4);
 
             } else {
-                p.timeToLive = Utils.getRandom(0.3, 0.5);
+                p.timeToLive = Utils.getRandom(0.5, 0.8);
             }
 
             this.particles.push(p);
