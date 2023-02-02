@@ -26,7 +26,6 @@ export class Color {
             a = this.a * t;
         }
 
-
         return new Color(r, g, b, a);
     }
 
@@ -82,7 +81,8 @@ export class Color {
      * @returns {Color}
      */
     static getRandom(min) {
-        min = (min) ? min : 0;
+        min = (typeof min === 'number') ? min : 0;
+
         const r = Utils.getRandomInt(min, 255);
         const g = Utils.getRandomInt(min, 255);
         const b = Utils.getRandomInt(min, 255);

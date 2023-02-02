@@ -42,6 +42,14 @@ export class Vec2 {
         return new Vec2(this.x * invNorm, this.y * invNorm);
     }
 
+    isZero() {
+        return (this.x === 0 && this.y === 0);
+    }
+
+    negate() {
+        return new Vec2(-this.x, -this.y);
+    }
+
     clone() {
         return new Vec2(this.x, this.y);
     }

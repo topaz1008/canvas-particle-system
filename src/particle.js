@@ -138,8 +138,8 @@ export class Particle {
      */
     constraint(context, deltaTime, bounce) {
         const radius = this.size / 2;
-        const viewWidth = context.width;
-        const viewHeight = context.height;
+        const viewWidth = 1280; // TODO: fix this urgently, refactor the constructor options
+        const viewHeight = 720;
 
         if (this.updateMode === ParticleUpdateMode.WARP) {
             // Wrap around boundaries
@@ -157,7 +157,7 @@ export class Particle {
 
         } else if (this.updateMode === ParticleUpdateMode.BOUNCE) {
             // Bounce
-            if (this.position.x > viewWidth - radius) {
+            if (this.position.x > (viewWidth - radius)) {
                 this.position.x = viewWidth - radius;
                 this.velocity.x *= -1;
 
@@ -166,7 +166,7 @@ export class Particle {
                 this.velocity.x *= -1;
             }
 
-            if (this.position.y > viewHeight - radius) {
+            if (this.position.y > (viewHeight - radius)) {
                 this.position.y = viewHeight - radius;
                 this.velocity.y *= -1;
 
@@ -177,11 +177,11 @@ export class Particle {
 
         } else if (this.updateMode === ParticleUpdateMode.KILL) {
             // Kill
-            if (this.position.x > viewWidth - radius || this.position.x < radius) {
+            if (this.position.x > (viewWidth - radius) || this.position.x < radius) {
                 this.dead = true;
             }
 
-            if (this.position.y > viewHeight - radius || this.position.y < radius) {
+            if (this.position.y > (viewHeight - radius )|| this.position.y < radius) {
                 this.dead = true;
             }
         }

@@ -21,7 +21,8 @@ export class FireworksEmitter extends BaseEmitter {
         };
 
         // Color
-        this.color = Color.getRandom(30);
+        // this.color = Color.getRandom(30);
+        this.color = new Color(255, 255, 255);
     }
 
     init() {
@@ -32,18 +33,18 @@ export class FireworksEmitter extends BaseEmitter {
         this.theta += deltaTime;
         if (this.theta > (2 * Math.PI)) this.theta = 0;
 
-        // Create a new particle with a 15% chance until the emitter is dead
-        if (Math.random() > 0.85) {
+        // Create a new particle with a 10% chance until the emitter is dead
+        if (Math.random() > 0.90) {
             // Jitter the particle's position a little
             const position = this.position.add(Vec2.getRandom(-3, 3));
-            const p = new Particle(position, Utils.getRandom(0.2, 0.75), this.color, this.options);
+            const p = new Particle(position, 1, this.color, this.options);
 
             p.velocity = new Vec2(Utils.getRandom(-3, 3), Utils.getRandom(-15, -10))
                 .normalize()
-                .multiply(Utils.getRandom(20, 30));
+                .multiply(Utils.getRandom(10, 20));
 
             // Random explode time
-            p.explodeAfter = Utils.getRandom(0.1, 0.3);
+            p.explodeAfter = Utils.getRandom(0.2, 0.4);
             p.exploded = false;
 
             // Size and lifetime
@@ -82,6 +83,7 @@ export class FireworksEmitter extends BaseEmitter {
                     // After some random time we create
                     // an explosion at this particle's position
                     p.exploded = true;
+                    this.particles.splice(i, 1);
                     this.#createExplosion(p.position);
                 }
 
@@ -103,18 +105,18 @@ export class FireworksEmitter extends BaseEmitter {
     }
 
     #createExplosion(position) {
-        const COUNT = 25;
+        const COUNT = 20;
         const options = {
             singleColor: true,
             updateMode: ParticleUpdateMode.KILL
         };
+        const color1 = Color.getRandom(64);
+        const color2 = Color.getRandom(64);
         for (let i = 0; i < COUNT; i++) {
-            const color = Color.getRandom(30);
+            // Randomly select between the 2 colors
+            const type = (Math.random() > 0.5) ? 0 : 1;
+            const color = (type === 0) ? color1 : color2;
             const p = new Particle(position.clone(), Utils.getRandom(0.7, 1.5), color, options);
-
-            // p.velocity = Vec2.getRandom(-3, 3)
-            //     .normalize()
-            //     .multiply(Utils.getRandom(30, 50));
 
             // Get a random velocity on the unit circle and randomly scale it
             p.velocity = new Vec2(
@@ -123,7 +125,13 @@ export class FireworksEmitter extends BaseEmitter {
                 .normalize()
                 .multiply(Utils.getRandom(2, 6));
 
-            p.timeToLive = Utils.getRandom(0.1, 0.4);
+            if (type === 0) {
+                p.timeToLive = Utils.getRandom(0.1, 0.5);
+
+            } else {
+                p.timeToLive = Utils.getRandom(0.3, 0.6);
+            }
+
             this.particles.push(p);
         }
     }

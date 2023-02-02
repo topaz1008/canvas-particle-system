@@ -1,4 +1,4 @@
-import { Particle } from '../particle.js';
+import { Particle, ParticleUpdateMode } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
@@ -10,6 +10,15 @@ export class TunnelEmitter extends BaseEmitter {
         super(position, particleCount, context);
 
         this.particleCount = 150;
+
+        this.options = {
+            singleColor: true,
+            updateMode: ParticleUpdateMode.KILL
+        };
+
+        // Color
+        // this.color = Color.getRandom(30);
+        this.color = new Color(255, 255, 255);
     }
 
     init() {
@@ -25,10 +34,9 @@ export class TunnelEmitter extends BaseEmitter {
             // p.size = Utils.getRandom(0.5, 1.5);
             //
             // this.particles[i] = p;
-            const p = new Particle(this.position.add(Vec2.getRandom(-100, 100)), 2, color);
+            const p = new Particle(this.position.add(Vec2.getRandom(-100, 100)), 2, color, this.options);
 
-            p.acceleration.x = Utils.getRandom(-10, 10);
-            p.acceleration.y = Utils.getRandom(-10, 10);
+            p.acceleration = Vec2.getRandom(-10, 10);
 
             const randomLength = Utils.getRandom(10, 20);
             p.velocity = new Vec2(

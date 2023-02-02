@@ -4,10 +4,11 @@ import { AttractingEmitter } from './emitters/attracting-emitter.js';
 import { PerlinEmitter } from './emitters/perlin-emitter.js';
 import { SprayEmitter } from './emitters/spray-emitter.js';
 import { FireworksEmitter } from './emitters/fireworks-emitter.js';
+import { TunnelEmitter } from './emitters/tunnel-emitter.js';
+import { MouseEmitter } from './emitters/mouse-emitter.js';
 
 import { UIControlElement } from './gui/ui-control-element.js';
 import { Vec2 } from './math/vec2.js';
-import { TunnelEmitter } from './emitters/tunnel-emitter.js';
 
 // App constants
 const VIEW_WIDTH = 1280,
@@ -24,8 +25,8 @@ const emittersMap = {
     perlin: PerlinEmitter,
     spray: SprayEmitter,
     fireworks: FireworksEmitter,
-    tunnel: TunnelEmitter
-    // TODO: Add mouse emitter (like a mouse trail)
+    tunnel: TunnelEmitter,
+    mouse: MouseEmitter
 };
 
 // Globals
@@ -71,6 +72,7 @@ canvas.addEventListener('mousedown', (e) => {
 
 }, false);
 
+
 update();
 
 // Update loop
@@ -107,7 +109,7 @@ function addEmitter(numOfEmitters, numOfParticles, position) {
 
     for (let i = 0; i < numOfEmitters; i++) {
         const emitter = new Constructor(position, numOfParticles, context);
-        emitter.init();
+        emitter.init(canvas);
 
         system.addEmitter(emitter);
     }
