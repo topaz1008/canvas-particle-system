@@ -70,11 +70,14 @@ export class FireworksEmitter extends BaseEmitter {
 
                 const acceleration = new Vec2(
                     10 * Math.cos(p.rotation - this.theta),
-                    10 * Math.sin(p.rotation - 2 * this.theta)
+                    10 * Math.sin(p.rotation - this.theta)
                 );
                 p.acceleration = p.acceleration.add(acceleration);
-                p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime * deltaTime))
-                    .add(new Vec2(Utils.getRandom(-1, 1), 0));
+                p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime * deltaTime));
+
+                // if (p.dead === false && p.isFromExplosion === true) {
+                //     p.velocity = p.velocity.add(new Vec2(0, Utils.getRandom(0.5, 1)));
+                // }
 
                 p.position = p.position.add(p.velocity);
 
@@ -105,31 +108,36 @@ export class FireworksEmitter extends BaseEmitter {
     }
 
     #createExplosion(position) {
-        const COUNT = 20;
+        const COUNT = 25;
         const options = {
             singleColor: true,
             updateMode: ParticleUpdateMode.KILL
         };
-        const color1 = Color.getRandom(64);
-        const color2 = Color.getRandom(64);
+
+        const halfLength = Math.floor(COUNT / 2);
+        const color1 = Color.getRandom(128);
+        const color2 = color1.scale(Utils.getRandom(0.5, 1.75));
+
         for (let i = 0; i < COUNT; i++) {
             // Randomly select between the 2 colors
-            const type = (Math.random() > 0.5) ? 0 : 1;
+            const type = (i < halfLength) ? 0 : 1;
             const color = (type === 0) ? color1 : color2;
             const p = new Particle(position.clone(), Utils.getRandom(0.7, 1.5), color, options);
 
+            p.isFromExplosion = true;
+
             // Get a random velocity on the unit circle and randomly scale it
             p.velocity = new Vec2(
-                Math.cos(2 * i / Math.PI - Utils.getRandom(-Math.PI, Math.PI)),
-                Math.sin(2 * i / Math.PI - Utils.getRandom(-Math.PI, Math.PI)))
+                Math.cos(2 * i / Math.PI),
+                Math.sin(2 * i / Math.PI))
                 .normalize()
-                .multiply(Utils.getRandom(2, 6));
+                .multiply(Utils.getRandom(2, 9));
 
             if (type === 0) {
-                p.timeToLive = Utils.getRandom(0.1, 0.5);
+                p.timeToLive = Utils.getRandom(0.1, 0.2);
 
             } else {
-                p.timeToLive = Utils.getRandom(0.3, 0.6);
+                p.timeToLive = Utils.getRandom(0.3, 0.5);
             }
 
             this.particles.push(p);
