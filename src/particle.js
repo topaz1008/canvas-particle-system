@@ -109,6 +109,7 @@ export class Particle {
             context.rotate(this.rotation);
         }
 
+        //context.fillStyle = this.color.toString();
         context.drawImage(this.img, 0, 0, this.img.width * this.size, this.img.height * this.size);
         context.restore();
     }
@@ -143,16 +144,16 @@ export class Particle {
 
         if (this.updateMode === ParticleUpdateMode.WARP) {
             // Wrap around boundaries
-            if (this.x > viewWidth) {
-                this.x = 0;
-            } else if (this.x < 0) {
-                this.x = viewWidth;
+            if (this.position.x > viewWidth) {
+                this.position.x = 0;
+            } else if (this.position.x < 0) {
+                this.position.x = viewWidth;
             }
 
-            if (this.y > viewHeight) {
-                this.y = 0;
-            } else if (this.y < 0) {
-                this.y = viewHeight;
+            if (this.position.y > viewHeight) {
+                this.position.y = 0;
+            } else if (this.position.y < 0) {
+                this.position.y = viewHeight;
             }
 
         } else if (this.updateMode === ParticleUpdateMode.BOUNCE) {
@@ -181,7 +182,7 @@ export class Particle {
                 this.dead = true;
             }
 
-            if (this.position.y > (viewHeight - radius )|| this.position.y < radius) {
+            if (this.position.y > (viewHeight - radius) || this.position.y < radius) {
                 this.dead = true;
             }
         }
