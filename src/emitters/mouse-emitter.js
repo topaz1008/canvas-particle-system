@@ -7,8 +7,8 @@ import { BaseEmitter } from './base-emitter.js';
 export class MouseEmitter extends BaseEmitter {
     emitterTimeAlive = 0;
     emitterTimeToLive = 6;
-    mousePosition = new Vec2(-100, -100);
-    oldMousePosition = new Vec2(-100, -100);
+    mousePosition = new Vec2(0, 0);
+    oldMousePosition = new Vec2(0, 0);
     particlesCreated = 0;
 
     constructor(position, particleCount, context) {
@@ -35,13 +35,13 @@ export class MouseEmitter extends BaseEmitter {
 
     update(deltaTime) {
         if ((this.particlesCreated % 20) === 0) {
-            // Generate a new color every 10 particles.
+            // Generate a new color every 20 particles.
             this.color = Color.getRandom(64);
         }
 
         const p = new Particle(this.mousePosition, Utils.getRandom(1, 3), this.color, this.options);
 
-        p.velocity = this.oldMousePosition.subtract(this.mousePosition)
+        p.velocity = this.mousePosition.subtract(this.oldMousePosition)
             .normalize()
             .multiply(Utils.getRandom(2, 3))
             .add(new Vec2(0, 0));
