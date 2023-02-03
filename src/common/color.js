@@ -11,10 +11,10 @@ export class Color {
      * @param a {Number=}
      */
     constructor(r, g, b, a) {
-        this.r = r || 255;
-        this.g = g || 255;
-        this.b = b || 255;
-        this.a = a || 255;
+        this.r = (typeof r === 'number') ? r : 255;
+        this.g = (typeof g === 'number') ? g : 255;
+        this.b = (typeof b === 'number') ? b : 255;
+        this.a = (typeof a === 'number') ? a : 255;
     }
 
     scale(t, alpha) {
@@ -87,6 +87,6 @@ export class Color {
         const g = Utils.getRandomInt(min, 255);
         const b = Utils.getRandomInt(min, 255);
 
-        return new Color(r, g, b, 1);
+        return new Color(r, g, b, 255);
     }
 }
