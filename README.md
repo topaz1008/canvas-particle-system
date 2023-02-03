@@ -9,3 +9,9 @@ Running
 ---------
 
 Just open `index.html` in your browser.
+
+TODO
+---------
+
+* Drop on-the-fly image tinting in favour of a more optimized solution. 
+e.g. create ~100 randomly colored sprites on app startup that can then be referenced quickly. 
