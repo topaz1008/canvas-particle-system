@@ -16,7 +16,7 @@ export class AttractingEmitter extends BaseEmitter {
         for (let i = 0; i < this.particleCount; i++) {
             // Randomly select between the 2 colors
             const color = (Math.random() > 0.5) ? color1 : color2;
-            const p = new Particle(this.position.add(Vec2.getRandom(-150, 150)), 2, color);
+            const p = new Particle(this.position.subtract(Vec2.getRandom(-150, 150)), 2, color);
 
             p.acceleration.x = Utils.getRandom(-10, 10);
             p.acceleration.y = Utils.getRandom(-10, 10);
@@ -49,10 +49,10 @@ export class AttractingEmitter extends BaseEmitter {
                 p.velocity = p.velocity.add(p.acceleration.multiply(deltaTime * deltaTime));
 
                 // Attract towards emitter
-                let g = this.position.subtract(p.position)
+                let gravity = this.position.subtract(p.position)
                     .add(Vec2.getRandom(-10, 10));
 
-                p.velocity = p.velocity.add(g.normalize().multiply(gravityLength));
+                p.velocity = p.velocity.add(gravity.normalize().multiply(gravityLength));
 
                 p.position = p.position.add(p.velocity.multiply(deltaTime));
 

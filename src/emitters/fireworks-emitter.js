@@ -6,7 +6,7 @@ import { BaseEmitter } from './base-emitter.js';
 
 export class FireworksEmitter extends BaseEmitter {
     emitterTimeAlive = 0;
-    emitterTimeToLive = 3;
+    emitterTimeToLive = 5;
 
     constructor(position, particleCount, context) {
         super(position, particleCount, context);
@@ -47,7 +47,7 @@ export class FireworksEmitter extends BaseEmitter {
             p.explodeAfter = Utils.getRandom(0.2, 0.4);
             p.exploded = false;
 
-            // Size and lifetime
+            // Lifetime
             p.timeToLive = Utils.getRandom(1, 3);
             this.particles.push(p);
         }
@@ -110,7 +110,7 @@ export class FireworksEmitter extends BaseEmitter {
     #createExplosion(position) {
         const COUNT = 25;
         const options = {
-            singleColor: true,
+            singleColor: false,
             updateMode: ParticleUpdateMode.KILL
         };
 

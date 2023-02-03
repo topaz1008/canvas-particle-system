@@ -35,7 +35,7 @@ const canvas = document.getElementById('main-canvas'),
 
 let lastTime = Date.now(),
     activeEmitterType = 'attracting',
-    system = new ParticleSystem(),
+    particleSystem = new ParticleSystem(),
     viewWidth,
     viewHeight;
 
@@ -43,7 +43,7 @@ let lastTime = Date.now(),
 const btnClear = new UIControlElement('#btn-clear[role=button]');
 btnClear.on('click', (e) => {
     e.preventDefault();
-    system.clear();
+    particleSystem.clear();
 });
 
 const dropdownEmitterType = new UIControlElement('#emitter-type[role=combobox]');
@@ -83,7 +83,7 @@ function update(time) {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    system.update(deltaTime);
+    particleSystem.update(deltaTime);
 
     lastTime = Date.now();
 
@@ -111,6 +111,6 @@ function addEmitter(numOfEmitters, numOfParticles, position) {
         const emitter = new Constructor(position, numOfParticles, context);
         emitter.init(canvas);
 
-        system.addEmitter(emitter);
+        particleSystem.addEmitter(emitter);
     }
 }

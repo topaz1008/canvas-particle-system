@@ -2,6 +2,7 @@ import { Particle } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
+import { AABB } from '../common/aabb.js';
 
 /**
  * The base emitter class; all other emitters should inherit from this class
@@ -12,7 +13,14 @@ import { Color } from '../common/color.js';
 export class BaseEmitter {
     position = new Vec2(0, 0);
     dead = false;
+
+    // Animated variable in time
+    // can be used for rotation and/or anything else
+    // this emitter wants to animate.
     theta = 0;
+
+    // Axis aligned bounding box for this emitter
+    aabb = null;
 
     /**
      * @param position {Vec2}
@@ -23,6 +31,7 @@ export class BaseEmitter {
         this.position = position;
         this.particles = new Array(particleCount);
         this.particleCount = particleCount;
+        this.aabb = new AABB();
 
         this.context = context;
     }
