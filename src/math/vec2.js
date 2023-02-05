@@ -9,52 +9,52 @@ export class Vec2 {
         this.y = y;
     }
 
-    add(rhs) {
+    add = (rhs) => {
         return new Vec2(this.x + rhs.x, this.y + rhs.y);
     }
 
-    subtract(rhs) {
+    subtract = (rhs) => {
         return new Vec2(this.x - rhs.x, this.y - rhs.y);
     }
 
-    multiply(t) {
+    multiply = (t) => {
         return new Vec2(this.x * t, this.y * t);
     }
 
-    divide(t) {
+    divide = (t) => {
         return new Vec2(this.x / t, this.y / t);
     }
 
-    dot(rhs) {
+    dot = (rhs) => {
         return ((this.x * rhs.x) + (this.y * rhs.y));
     }
 
-    magnitude() {
+    magnitude = () => {
         return Math.sqrt((this.x * this.x) + (this.y * this.y));
     }
 
-    magnitudeSquared() {
+    magnitudeSquared = () => {
         return ((this.x * this.x) + (this.y * this.y));
     }
 
-    normalize() {
+    normalize = () => {
         const invNorm = 1 / this.magnitude();
         return new Vec2(this.x * invNorm, this.y * invNorm);
     }
 
-    isZero() {
+    isZero = () => {
         return (this.x === 0 && this.y === 0);
     }
 
-    negate() {
+    negate = () => {
         return new Vec2(-this.x, -this.y);
     }
 
-    clone() {
+    clone = () => {
         return new Vec2(this.x, this.y);
     }
 
-    static getRandom(min, max) {
+    static getRandom = (min, max) => {
         return new Vec2(Utils.getRandom(min, max), Utils.getRandom(min, max));
     }
 }

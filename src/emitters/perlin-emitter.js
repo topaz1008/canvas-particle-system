@@ -18,7 +18,7 @@ export class PerlinEmitter extends BaseEmitter {
         this.perlin = this.context.createImageData(width, height);
     }
 
-    init() {
+    init = () => {
         const viewWidth = 1280;
         const viewHeight = 720;
 
@@ -58,7 +58,7 @@ export class PerlinEmitter extends BaseEmitter {
         }
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
 
         // this.context.putImageData(this.perlin, 0, 0);
         const viewWidth = 1280;

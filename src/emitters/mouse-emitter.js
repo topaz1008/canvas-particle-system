@@ -27,13 +27,13 @@ export class MouseEmitter extends BaseEmitter {
         this.color = Color.getRandom(64);
     }
 
-    init(canvas) {
+    init = (canvas) => {
         canvas.addEventListener('mousemove', (e) => {
             this.mousePosition = new Vec2(e.offsetX, e.offsetY);
         }, false);
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         if ((this.particlesCreated % 20) === 0) {
             // Generate a new color every 20 particles.
             this.color = Color.getRandom(64);

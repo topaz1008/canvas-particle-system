@@ -36,7 +36,7 @@ export class UIControlElement {
      * @param action {String}
      * @param callback {Function}
      */
-    on(action, callback) {
+    on = (action, callback) => {
         if (this.#elements[action] === undefined) {
             throw new Error(`No matching action found: "${action}"`);
         }

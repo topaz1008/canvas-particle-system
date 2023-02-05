@@ -24,11 +24,11 @@ export class SprayEmitter extends BaseEmitter {
         this.color = Color.getRandom(30);
     }
 
-    init() {
+    init = () => {
         // No init needed here, we create all particles on-the-fly
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         this.theta += deltaTime;
         if (this.theta > (2 * Math.PI)) this.theta = 0;
 

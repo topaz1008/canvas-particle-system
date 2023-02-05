@@ -25,11 +25,11 @@ export class FireworksEmitter extends BaseEmitter {
         this.color = new Color(255, 255, 255);
     }
 
-    init() {
+    init = () => {
         // No init needed here, we create all particles on-the-fly
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         this.theta += deltaTime;
         if (this.theta > (2 * Math.PI)) this.theta = 0;
 
@@ -107,7 +107,7 @@ export class FireworksEmitter extends BaseEmitter {
         }
     }
 
-    #createExplosion(position) {
+    #createExplosion = (position) => {
         const COUNT = 25;
         const options = {
             singleColor: false,

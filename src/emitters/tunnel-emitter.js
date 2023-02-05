@@ -21,7 +21,7 @@ export class TunnelEmitter extends BaseEmitter {
         this.color = new Color(255, 255, 255);
     }
 
-    init() {
+    init = () => {
         const color = Color.getRandom(64);
         for (let i = 0; i < this.particleCount; i++) {
             // const p = new Particle(this.position.clone(), 2, color);
@@ -50,7 +50,7 @@ export class TunnelEmitter extends BaseEmitter {
         }
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         const gl = Utils.getRandom(20, 50);
 
         for (let i = 0; i < this.particles.length; i++) {

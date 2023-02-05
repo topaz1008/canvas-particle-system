@@ -10,7 +10,7 @@ export class AttractingEmitter extends BaseEmitter {
         super(position, particleCount, context);
     }
 
-    init() {
+    init = () => {
         const color1 = Color.getRandom(64);
         const color2 = Color.getRandom(64);
         for (let i = 0; i < this.particleCount; i++) {
@@ -33,7 +33,7 @@ export class AttractingEmitter extends BaseEmitter {
         }
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         const gravityLength = Utils.getRandom(5, 35);
 
         for (let i = 0; i < this.particles.length; i++) {

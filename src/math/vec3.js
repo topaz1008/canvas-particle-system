@@ -10,45 +10,45 @@ export class Vec3 {
         this.z = z;
     }
 
-    add(rhs) {
+    add = (rhs) => {
         return new Vec3(this.x + rhs.x, this.y + rhs.y, this.z + rhs.z);
     }
 
-    subtract(rhs) {
+    subtract = (rhs) => {
         return new Vec3(this.x - rhs.x, this.y - rhs.y, this.z - rhs.z);
     }
 
-    multiply(t) {
+    multiply = (t) => {
         return new Vec3(this.x * t, this.y * t, this.z * t);
     }
 
-    divide(t) {
+    divide = (t) => {
         const inv = 1 / t;
         return new Vec3(this.x * inv, this.y * inv, this.z * inv);
     }
 
-    dot(rhs) {
+    dot = (rhs) => {
         return ((this.x * rhs.x) + (this.y * rhs.y) + (this.z * rhs.z));
     }
 
-    magnitude() {
+    magnitude = () => {
         return Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
     }
 
-    magnitudeSquared() {
+    magnitudeSquared = () => {
         return ((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
     }
 
-    normalize() {
+    normalize = () => {
         const invNorm = 1 / this.magnitude();
         return new Vec3(this.x * invNorm, this.y * invNorm, this.z * invNorm);
     }
 
-    clone() {
+    clone = () => {
         return new Vec3(this.x, this.y, this.z);
     }
 
-    static getRandom(min, max) {
+    static getRandom = (min, max) => {
         return new Vec3(Utils.getRandom(min, max), Utils.getRandom(min, max), Utils.getRandom(min, max));
     }
 }

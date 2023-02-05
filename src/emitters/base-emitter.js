@@ -1,8 +1,20 @@
-import { Particle } from '../particle.js';
+import { Particle, ParticleUpdateMode } from '../particle.js';
 import { Vec2 } from '../math/vec2.js';
 import { Utils } from '../common/utils.js';
 import { Color } from '../common/color.js';
 import { AABB } from '../common/aabb.js';
+
+// new BaseEmitter(position, options)
+const options = {
+    particleCount: 100,
+    preAllocate: true,
+    singleColor: true,
+    aabb: new AABB(),
+    canvas: null,
+    context: null,
+    timeToLive: 4, // || null
+    updateMode: ParticleUpdateMode.WARP
+};
 
 /**
  * The base emitter class; all other emitters should inherit from this class
@@ -12,7 +24,6 @@ import { AABB } from '../common/aabb.js';
  */
 export class BaseEmitter {
     position = new Vec2(0, 0);
-    dead = false;
 
     // Animated variable in time
     // can be used for rotation and/or anything else
@@ -21,6 +32,15 @@ export class BaseEmitter {
 
     // Axis aligned bounding box for this emitter
     aabb = null;
+
+    // Time to live (emitter)
+    timeToLive = 0;
+
+    // Time alive (emitter)
+    timeAlive = 0;
+
+    // Is this emitter dead?
+    dead = false;
 
     /**
      * @param position {Vec2}
@@ -39,7 +59,7 @@ export class BaseEmitter {
     /**
      * Any setup we want to do before starting to update this emitter.
      */
-    init() {
+    init = () => {
         for (let i = 0; i < this.particleCount; i++) {
             const color = Color.getRandom(30);
 
@@ -64,7 +84,7 @@ export class BaseEmitter {
      *
      * @param deltaTime {Number}
      */
-    update(deltaTime) {
+    update = (deltaTime) => {
         for (let i = 0; i < this.particles.length; i++) {
             const p = this.particles[i];
             if (!p) continue;

@@ -97,11 +97,11 @@ export class Particle {
      * @param context {CanvasRenderingContext2D}
      * @param rotate {Boolean}
      */
-    draw(context, rotate) {
+    draw = (context, rotate) => {
         if (!this.imageLoaded) return;
 
         context.save();
-        context.globalAlpha = (1 - this.timeAlive / this.timeToLive);
+        context.globalAlpha = 1 - (this.timeAlive / this.timeToLive);
 
         context.resetTransform();
         context.translate(this.position.x, this.position.y);
@@ -114,7 +114,7 @@ export class Particle {
         context.restore();
     }
 
-    update(deltaTime) {
+    update = (deltaTime) => {
         // TODO: implement this; move stuff from constraint() that doesnt belong there
         this.timeAlive += deltaTime;
         if (this.timeAlive >= this.timeToLive) {
@@ -137,7 +137,7 @@ export class Particle {
      * @param deltaTime {Number}
      * @param bounce {Boolean=}
      */
-    constraint(context, deltaTime, bounce) {
+    constraint = (context, deltaTime, bounce) => {
         const radius = this.size / 2;
         const viewWidth = 1280; // TODO: fix this urgently, refactor the constructor options
         const viewHeight = 720;

@@ -8,13 +8,14 @@ export class AABB {
     max = null;
 
     constructor(...params) {
-        // if params.length === 0
-        this.min = new Vec2(0, 0);
-        this.max = new Vec2(0, 0);
+        if (params.length === 0) {
+            this.min = new Vec2(0, 0);
+            this.max = new Vec2(0, 0);
 
-        if (params.length === 1) {
+        } else if (params.length === 1) {
             // Same Vec2 for both min and max
-            this.min = this.max = params[0];
+            this.min = params[0].clone();
+            this.max = params[0].clone();
 
         } else if (params.length === 2) {
             // Different Vec2 for min and max

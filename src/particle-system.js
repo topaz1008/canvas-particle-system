@@ -4,9 +4,9 @@
  * There should really only be one instance of this in a scene.
  */
 export class ParticleSystem {
-    constructor() {
-        this.emitters = [];
-    }
+    emitters = [];
+
+    constructor() {}
 
     /**
      * Add a new emitter to this system.
@@ -14,7 +14,7 @@ export class ParticleSystem {
      * @param emitter {BaseEmitter}
      * @returns {ParticleSystem}
      */
-    addEmitter(emitter) {
+    addEmitter = (emitter) => {
         this.emitters.push(emitter);
 
         return this;
@@ -25,7 +25,7 @@ export class ParticleSystem {
      *
      * @returns {ParticleSystem}
      */
-    clear() {
+    clear = () => {
         for (let i = 0; i < this.emitters.length; i++) {
             this.emitters[i].dead = true;
         }
@@ -38,7 +38,7 @@ export class ParticleSystem {
      *
      * @param deltaTime {Number}
      */
-    update(deltaTime) {
+    update = (deltaTime) => {
         for (let i = 0; i < this.emitters.length; i++) {
             const emitter = this.emitters[i];
             if (!emitter) continue;

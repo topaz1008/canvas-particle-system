@@ -17,7 +17,7 @@ export class Color {
         this.a = (typeof a === 'number') ? a : 255;
     }
 
-    scale(t, alpha) {
+    scale = (t, alpha) => {
         const r = this.r * t;
         const g = this.g * t;
         const b = this.b * t;
@@ -29,7 +29,7 @@ export class Color {
         return new Color(r, g, b, a);
     }
 
-    interpolate(t, rhs, alpha) {
+    interpolate = (t, rhs, alpha) => {
         const r = this.r + t * (rhs.r - this.r);
         const g = this.g + t * (rhs.g - this.g);
         const b = this.b + t * (rhs.b - this.b);
@@ -41,11 +41,11 @@ export class Color {
         return new Color(r, g, b, a);
     }
 
-    clone() {
+    clone = () => {
         return new Color(this.r, this.g, this.b, this.a);
     }
 
-    toString() {
+    toString = () => {
         return `rgba(${this.r}, ${this.g}, ${this.b}, ${this.a})`;
     }
 
@@ -56,7 +56,7 @@ export class Color {
      * @param str {String}
      * @returns {Color}
      */
-    static fromString(str) {
+    static fromString = (str) => {
         const regex = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i;
 
         const match = regex.exec(str);
@@ -80,7 +80,7 @@ export class Color {
      * @param min {Number=} The minimum value to consider for each channel
      * @returns {Color}
      */
-    static getRandom(min) {
+    static getRandom = (min) => {
         min = (typeof min === 'number') ? min : 0;
 
         const r = Utils.getRandomInt(min, 255);

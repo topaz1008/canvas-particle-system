@@ -2,16 +2,16 @@ import { Vec2 } from '../math/vec2.js';
 import { Vec3 } from '../math/vec3.js';
 
 export class Utils {
-    static makeRGBA(r, g, b, a) {
+    static makeRGBA = (r, g, b, a) => {
         // x | x = faster Math.floor(x)
         return `rgba(${r | r}, ${g | g}, ${b | b}, ${a})`;
     }
 
-    static getRandom(min, max) {
+    static getRandom = (min, max) => {
         return min + Math.random() * (max - min);
     }
 
-    static getRandomInt(min, max) {
+    static getRandomInt = (min, max) => {
         const x = min + Math.random() * (max + 1 - min);
 
         return (x > 0) ? Math.floor(x) : Math.floor(x - 1);
@@ -25,7 +25,7 @@ export class Utils {
      * @param tintColor {String}
      * @returns {String}
      */
-    static tintImage(imageElement, tintColor) {
+    static tintImage = (imageElement, tintColor) => {
         const canvas = document.createElement('canvas'),
             context = canvas.getContext('2d');
 
@@ -72,7 +72,7 @@ export class Utils {
      * @param t {Number}
      * @return {Vec2}
      */
-    static vec2Lerp(a, b, t) {
+    static vec2Lerp = (a, b, t) => {
         const x = a.x + t * (b.x - a.x);
         const y = a.y + t * (b.y - a.y);
 
@@ -87,7 +87,7 @@ export class Utils {
      * @param t {Number}
      * @return {Vec3}
      */
-    static vec3Lerp(a, b, t) {
+    static vec3Lerp = (a, b, t) => {
         const x = a.x + t * (b.x - a.x);
         const y = a.y + t * (b.y - a.y);
         const z = a.z + t * (b.z - a.z);
